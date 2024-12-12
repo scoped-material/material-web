@@ -4,13 +4,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../focus/md-focus-ring.js';
-import '../../ripple/ripple.js';
+import {MdFocusRing} from '../../focus/MdFocusRing.js';
+import {MdRipple} from '../../ripple/MdRipple.js';
 
 import {html, isServer, LitElement, nothing} from 'lit';
 import {property, state} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {literal, html as staticHtml} from 'lit/static-html.js';
+
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 import {ARIAMixinStrict} from '../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../internal/aria/delegate.js';
@@ -29,7 +31,7 @@ type LinkTarget = '_blank' | '_parent' | '_self' | '_top';
 
 // Separate variable needed for closure.
 const iconButtonBaseClass = mixinDelegatesAria(
-  mixinElementInternals(LitElement),
+  mixinElementInternals(ScopedElementsMixin((LitElement))),
 );
 
 /**
@@ -51,6 +53,11 @@ export class IconButton extends iconButtonBaseClass implements FormSubmitter {
   static override shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
+  };
+
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-ripple': MdRipple,
   };
 
   /**
