@@ -11,6 +11,7 @@ import {live} from 'lit/directives/live.js';
 import {StyleInfo, styleMap} from 'lit/directives/style-map.js';
 import {StaticValue, html as staticHtml} from 'lit/static-html.js';
 
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 import {Field} from '../../field/internal/field.js';
 import {ARIAMixinStrict} from '../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../internal/aria/delegate.js';
@@ -75,7 +76,7 @@ export type InvalidTextFieldType =
 const textFieldBaseClass = mixinDelegatesAria(
   mixinOnReportValidity(
     mixinConstraintValidation(
-      mixinFormAssociated(mixinElementInternals(LitElement)),
+      mixinFormAssociated(mixinElementInternals(ScopedElementsMixin(LitElement))),
     ),
   ),
 );
@@ -99,7 +100,7 @@ export abstract class TextField extends textFieldBaseClass {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-
+  
   /**
    * Gets or sets whether or not the text field is in a visually invalid state.
    *
