@@ -4,12 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../focus/md-focus-ring.js';
-import '../../ripple/ripple.js';
+import {MdFocusRing} from '../../focus/MdFocusRing.js';
+import {MdRipple} from '../../ripple/MdRipple.js';
 
 import {html, isServer, LitElement, nothing, TemplateResult} from 'lit';
 import {property, query} from 'lit/decorators.js';
 import {ClassInfo, classMap} from 'lit/directives/class-map.js';
+
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 import {mixinDelegatesAria} from '../../internal/aria/delegate.js';
 import {
@@ -37,7 +39,7 @@ import {CheckboxValidator} from '../../labs/behaviors/validators/checkbox-valida
 // Separate variable needed for closure.
 const switchBaseClass = mixinDelegatesAria(
   mixinConstraintValidation(
-    mixinFormAssociated(mixinElementInternals(LitElement)),
+    mixinFormAssociated(mixinElementInternals(ScopedElementsMixin(LitElement))),
   ),
 );
 
@@ -52,6 +54,11 @@ export class Switch extends switchBaseClass {
   static override shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
+  };
+
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-ripple': MdRipple,
   };
 
   /**
