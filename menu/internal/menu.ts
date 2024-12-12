@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../elevation/elevation.js';
-import '../../focus/md-focus-ring.js';
+import {MdElevation} from '../../elevation/MdElevation.js';
+import {MdFocusRing} from '../../focus/MdFocusRing.js';
 
 import {LitElement, PropertyValues, html, isServer, nothing} from 'lit';
 import {property, query, queryAssignedElements, state} from 'lit/decorators.js';
@@ -37,6 +37,7 @@ import {
   SurfacePositionTarget,
 } from './controllers/surfacePositionController.js';
 import {TypeaheadController} from './controllers/typeaheadController.js';
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 export {Corner} from './controllers/surfacePositionController.js';
 
@@ -85,7 +86,13 @@ function getFocusedElement(
  * @fires closing {Event} Fired before the closing animation begins
  * @fires closed {Event} Fired once the menu is closed, after any animations
  */
-export abstract class Menu extends LitElement {
+export abstract class Menu extends ScopedElementsMixin(LitElement) {
+
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-elevation': MdElevation,
+  };
+
   @query('.menu') private readonly surfaceEl!: HTMLElement | null;
   @query('slot') private readonly slotEl!: HTMLSlotElement | null;
 
