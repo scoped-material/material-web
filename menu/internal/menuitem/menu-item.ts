@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../../focus/md-focus-ring.js';
-import '../../../labs/item/item.js';
-import '../../../ripple/ripple.js';
+import {MdFocusRing} from '../../../focus/MdFocusRing.js';
+import {MdItem} from '../../../labs/item/MdItem.js';
+import {MdRipple} from '../../../ripple/MdRipple.js';
 
 import {html, LitElement, nothing, TemplateResult} from 'lit';
 import {
@@ -18,6 +18,8 @@ import {
 import {ClassInfo, classMap} from 'lit/directives/class-map.js';
 import {literal, html as staticHtml, StaticValue} from 'lit/static-html.js';
 
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
+
 import {ARIAMixinStrict} from '../../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../../internal/aria/delegate.js';
 import {
@@ -27,7 +29,7 @@ import {
 } from '../controllers/menuItemController.js';
 
 // Separate variable needed for closure.
-const menuItemBaseClass = mixinDelegatesAria(LitElement);
+const menuItemBaseClass = mixinDelegatesAria(ScopedElementsMixin(LitElement));
 
 /**
  * @fires close-menu {CustomEvent<{initiator: SelectOption, reason: Reason, itemPath: SelectOption[]}>}
@@ -38,6 +40,12 @@ export class MenuItemEl extends menuItemBaseClass implements MenuItem {
   static override shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
+  };
+
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-item': MdItem,
+    'md-ripple': MdRipple,
   };
 
   /**
