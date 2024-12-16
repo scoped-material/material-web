@@ -225,10 +225,10 @@ export class TypeaheadController {
     }
 
     // Start up a new keystroke buffer timeout
-    this.cancelTypeaheadTimeout = setTimeout(
+    this.cancelTypeaheadTimeout = window.setTimeout(
       this.endTypeahead,
       this.getProperties().typeaheadBufferTime,
-    );
+    ) ;
 
     this.typaheadBuffer += event.key.toLowerCase();
 

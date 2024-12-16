@@ -390,7 +390,7 @@ function isFirstInvalidControlInForm(
   }
 
   let firstInvalidControl: Element | undefined;
-  for (const element of form.elements) {
+  for (const element of Array.from(form.elements)) {
     if (element.matches(':invalid')) {
       firstInvalidControl = element;
       break;
