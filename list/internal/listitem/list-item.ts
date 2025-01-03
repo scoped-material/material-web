@@ -4,15 +4,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../../focus/md-focus-ring.js';
-import '../../../labs/item/item.js';
-import '../../../ripple/ripple.js';
+import {MdFocusRing} from '../../../focus/MdFocusRing.js';
+import {MdItem} from '../../../labs/item/MdItem.js';
+import {MdRipple} from '../../../ripple/MdRipple.js';
 
 import {html, LitElement, nothing, PropertyValues, TemplateResult} from 'lit';
 import {property, query} from 'lit/decorators.js';
 import {ClassInfo, classMap} from 'lit/directives/class-map.js';
 import {literal, html as staticHtml, StaticValue} from 'lit/static-html.js';
 
+import {ScopedElementsMixin} from '@open-wc/scoped-elements/lit-element.js';
 import {ARIAMixinStrict} from '../../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../../internal/aria/delegate.js';
 import {
@@ -26,7 +27,7 @@ import {
 export type ListItemType = 'text' | 'button' | 'link';
 
 // Separate variable needed for closure.
-const listItemBaseClass = mixinDelegatesAria(LitElement);
+const listItemBaseClass = mixinDelegatesAria(ScopedElementsMixin(LitElement));
 
 /**
  * @fires request-activation {Event} Requests the list to set `tabindex=0` on
@@ -37,6 +38,12 @@ export class ListItemEl extends listItemBaseClass implements ListItem {
   static override shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
+  };
+
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-item': MdItem,
+    'md-ripple': MdRipple,
   };
 
   /**
