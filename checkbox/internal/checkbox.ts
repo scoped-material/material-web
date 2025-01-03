@@ -4,12 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../focus/md-focus-ring.js';
-import '../../ripple/ripple.js';
+import { MdFocusRing } from '../../focus/MdFocusRing.js';
+import { MdRipple } from '../../ripple/MdRipple.js';
 
 import {html, isServer, LitElement, nothing, PropertyValues} from 'lit';
 import {property, query, state} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
+
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 import {ARIAMixinStrict} from '../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../internal/aria/delegate.js';
@@ -34,7 +36,7 @@ import {CheckboxValidator} from '../../labs/behaviors/validators/checkbox-valida
 // Separate variable needed for closure.
 const checkboxBaseClass = mixinDelegatesAria(
   mixinConstraintValidation(
-    mixinFormAssociated(mixinElementInternals(LitElement)),
+    mixinFormAssociated(mixinElementInternals(ScopedElementsMixin(LitElement))),
   ),
 );
 
@@ -54,6 +56,11 @@ export class Checkbox extends checkboxBaseClass {
   static override shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
+  };
+
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-ripple': MdRipple,
   };
 
   /**
