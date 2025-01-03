@@ -1,6 +1,6 @@
 {
-  "name": "@scopedelement/matarial-web",
-  "version": "3.0.0",
+  "name": "@scopedelement/material-web",
+  "version": "3.1.0",
   "publishConfig": {
     "access": "public"
   },
