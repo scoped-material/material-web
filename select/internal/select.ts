@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../menu/menu.js';
-
 import {html, isServer, LitElement, nothing, PropertyValues} from 'lit';
 import {property, query, queryAssignedElements, state} from 'lit/decorators.js';
 import {ClassInfo, classMap} from 'lit/directives/class-map.js';
 import {styleMap} from 'lit/directives/style-map.js';
 import {html as staticHtml, StaticValue} from 'lit/static-html.js';
+
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 import {Field} from '../../field/internal/field.js';
 import {ARIAMixinStrict} from '../../internal/aria/aria.js';
@@ -53,7 +53,7 @@ const VALUE = Symbol('value');
 const selectBaseClass = mixinDelegatesAria(
   mixinOnReportValidity(
     mixinConstraintValidation(
-      mixinFormAssociated(mixinElementInternals(LitElement)),
+      mixinFormAssociated(mixinElementInternals(ScopedElementsMixin(LitElement))),
     ),
   ),
 );

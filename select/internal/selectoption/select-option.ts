@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../../focus/md-focus-ring.js';
-import '../../../labs/item/item.js';
-import '../../../ripple/ripple.js';
+import { MdFocusRing } from '@material/web/focus/MdFocusRing.js';
+import { MdItem } from '@material/web/labs/item/MdItem.js';
+import { MdRipple } from '@material/web/ripple/MdRipple.js';
 
 import {html, LitElement, nothing} from 'lit';
 import {
@@ -16,6 +16,8 @@ import {
   queryAssignedNodes,
 } from 'lit/decorators.js';
 import {ClassInfo, classMap} from 'lit/directives/class-map.js';
+
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 import {ARIAMixinStrict} from '../../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../../internal/aria/delegate.js';
@@ -50,7 +52,7 @@ interface SelectOptionSelf {
 export type SelectOption = SelectOptionSelf & MenuItem;
 
 // Separate variable needed for closure.
-const selectOptionBaseClass = mixinDelegatesAria(LitElement);
+const selectOptionBaseClass = mixinDelegatesAria(ScopedElementsMixin(LitElement));
 
 /**
  * @fires close-menu {CustomEvent<{initiator: SelectOption, reason: Reason, itemPath: SelectOption[]}>}
@@ -69,6 +71,12 @@ export class SelectOptionEl
   static override shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
+  };
+
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-item': MdItem,
+    'md-ripple': MdRipple,
   };
 
   /**
