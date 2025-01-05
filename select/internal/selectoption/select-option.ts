@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { MdFocusRing } from '@material/web/focus/MdFocusRing.js';
-import { MdItem } from '@material/web/labs/item/MdItem.js';
-import { MdRipple } from '@material/web/ripple/MdRipple.js';
+import { MdFocusRing } from '../../../focus/MdFocusRing.js'
+import { MdItem } from '../../..//labs/item/MdItem.js';
+import { MdRipple } from '../../../ripple/MdRipple.js';
 
 import {html, LitElement, nothing} from 'lit';
 import {
