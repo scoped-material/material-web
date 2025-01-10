@@ -94,6 +94,10 @@
     pointer-events: none;
   }
 
+  .list-item.activated:not(.disabled) {
+    background-color: var(--md-list-item-activated-background,#6200ee38);
+  }
+
   [slot='container'] {
     pointer-events: none;
   }

@@ -74,6 +74,9 @@ export class ListItemEl extends listItemBaseClass implements ListItem {
    */
   @property() target: '_blank' | '_parent' | '_self' | '_top' | '' = '';
 
+  /** Highlight the item */
+  @property({type: Boolean}) activated = false;
+
   @query('.list-item') protected readonly listItemRoot!: HTMLElement | null;
 
   private get isDisabled() {
@@ -179,7 +182,7 @@ export class ListItemEl extends listItemBaseClass implements ListItem {
    * Classes applied to the list item root.
    */
   protected getRenderClasses(): ClassInfo {
-    return {'disabled': this.isDisabled};
+    return {'disabled': this.isDisabled,'activated': this.activated,};
   }
 
   /**
