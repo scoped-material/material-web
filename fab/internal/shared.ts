@@ -4,13 +4,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../elevation/elevation.js';
-import '../../focus/md-focus-ring.js';
-import '../../ripple/ripple.js';
+//import '../../elevation/elevation.js';
+import { MdElevation } from '@material/web/elevation/MdElevation.js';
+//import '../../focus/md-focus-ring.js';
+import { MdFocusRing } from '@material/web/focus/MdFocusRing.js';
+//import '../../ripple/ripple.js';
+import { MdRipple } from '@material/web/ripple/MdRipple.js';
 
 import {html, LitElement, nothing} from 'lit';
 import {property} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
+
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 import {ARIAMixinStrict} from '../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../internal/aria/delegate.js';
@@ -21,7 +26,7 @@ import {mixinDelegatesAria} from '../../internal/aria/delegate.js';
 export type FabSize = 'medium' | 'small' | 'large';
 
 // Separate variable needed for closure.
-const fabBaseClass = mixinDelegatesAria(LitElement);
+const fabBaseClass = mixinDelegatesAria(ScopedElementsMixin(LitElement));
 
 // tslint:disable-next-line:enforce-comments-on-exported-symbols
 export abstract class SharedFab extends fabBaseClass {
@@ -37,6 +42,13 @@ export abstract class SharedFab extends fabBaseClass {
    * NOTE: Branded FABs cannot be sized to `small`, and Extended FABs do not
    * have different sizes.
    */
+
+  static scopedElements = {
+      'md-ripple': MdRipple,
+      'md-foxus-ring': MdFocusRing,
+      'md-elevation': MdElevation,
+    };
+
   @property({reflect: true}) size: FabSize = 'medium';
 
   /**
