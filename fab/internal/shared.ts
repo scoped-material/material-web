@@ -5,11 +5,11 @@
  */
 
 //import '../../elevation/elevation.js';
-import { MdElevation } from '@material/web/elevation/MdElevation.js';
+import { MdElevation } from '../../elevation/MdElevation.js';
 //import '../../focus/md-focus-ring.js';
-import { MdFocusRing } from '@material/web/focus/MdFocusRing.js';
+import { MdFocusRing } from '../../focus/MdFocusRing.js';
 //import '../../ripple/ripple.js';
-import { MdRipple } from '@material/web/ripple/MdRipple.js';
+import { MdRipple } from '../../ripple/MdRipple.js';
 
 import {html, LitElement, nothing} from 'lit';
 import {property} from 'lit/decorators.js';
