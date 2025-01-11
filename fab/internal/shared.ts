@@ -45,7 +45,7 @@ export abstract class SharedFab extends fabBaseClass {
 
   static scopedElements = {
       'md-ripple': MdRipple,
-      'md-foxus-ring': MdFocusRing,
+      'md-focus-ring': MdFocusRing,
       'md-elevation': MdElevation,
     };
 
