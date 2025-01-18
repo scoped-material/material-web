@@ -4,11 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import '../../divider/divider.js';
+// import '../../divider/divider.js';
+import { MdDivider } from '../../divider/MdDevider.js';
 
 import {html, isServer, LitElement, nothing} from 'lit';
 import {property, query, state} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
+
+import {ScopedElementsMixin} from '@open-wc/scoped-elements/lit-element.js'
 
 import {ARIAMixinStrict} from '../../internal/aria/aria.js';
 import {mixinDelegatesAria} from '../../internal/aria/delegate.js';
@@ -22,7 +25,7 @@ import {
 } from './animations.js';
 
 // Separate variable needed for closure.
-const dialogBaseClass = mixinDelegatesAria(LitElement);
+const dialogBaseClass = mixinDelegatesAria(ScopedElementsMixin(LitElement));
 
 /**
  * A dialog component.
@@ -42,6 +45,12 @@ export class Dialog extends dialogBaseClass {
   /**
    * Opens the dialog when set to `true` and closes it when set to `false`.
    */
+
+  static scopedElements = {
+    'md-divider': MdDivider,
+  };
+
+
   @property({type: Boolean})
   get open() {
     return this.isOpen;
