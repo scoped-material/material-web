@@ -5,11 +5,15 @@
  */
 
 import '../../focus/md-focus-ring.js';
+import { MdFocusRing } from '../../focus/MdFocusRing.js';
 import '../../ripple/ripple.js';
+import { MdRipple } from '../../ripple/ripple.js';
 
 import {html, isServer, LitElement} from 'lit';
 import {property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
+
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 import {isActivationClick} from '../../internal/events/form-label-activation.js';
 import {
@@ -36,7 +40,7 @@ let maskId = 0;
 
 // Separate variable needed for closure.
 const radioBaseClass = mixinConstraintValidation(
-  mixinFormAssociated(mixinElementInternals(mixinFocusable(LitElement))),
+  mixinFormAssociated(mixinElementInternals(mixinFocusable(ScopedElementsMixin(LitElement)))),
 );
 
 /**
@@ -52,6 +56,10 @@ export class Radio extends radioBaseClass {
   // reference to the mask. This should be removed once the bug is fixed.
   private readonly maskId = `cutout${++maskId}`;
 
+  static scopedElements = {
+    'md-focus-ring': MdFocusRing,
+    'md-ripple': MdRipple,
+  };
   /**
    * Whether or not the radio is selected.
    */
