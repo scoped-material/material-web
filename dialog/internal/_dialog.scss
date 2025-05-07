@@ -13,8 +13,9 @@
 
 @mixin theme($tokens) {
   $supported-tokens: tokens.$md-comp-dialog-supported-tokens;
+
   @each $token, $value in $tokens {
-    @if list.index($supported-tokens, $token) == null {
+    @if list.index($supported-tokens, $token)==null {
       @error 'Token `#{$token}` is not a supported token.';
     }
 
@@ -36,8 +37,8 @@
     border-end-start-radius: map.get($tokens, 'container-shape-end-start');
     display: contents;
     margin: auto;
-    max-height: min(560px, calc(100% - 48px));
-    max-width: min(560px, calc(100% - 48px));
+    max-height: min(var(--md-dialog-container-max-height, 560px), calc(100% - 48px)); // Change compared to upstream
+    max-width: min(var(--md-dialog-container-max-width, 560px), calc(100% - 48px)); // Change compared to upstream
     min-height: 140px;
     min-width: 280px;
     position: fixed;
